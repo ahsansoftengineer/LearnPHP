@@ -1,5 +1,5 @@
 <?php
-  echo '<h3><a href="0.php">Home</a></h3>';
+  echo '<h2><a href="0.php">Home</a></h2>';
   echo "<h2>1. Array</h2>";
   $colors = array("red", 20, "blue", "12.50");
   echo $colors[0]."<br>";
@@ -36,18 +36,18 @@
   foreach($choices as $key => $value){
     echo $key ." = ". $value."<br>";
   }
-  echo "<h3>3. Multidimentional Array </h2>";
-  $employee = [
+  echo "<h2>3. Multidimensional Array For Loop</h2>";
+  $employees = [
     [1,"Ahsan", "PHP Developer", 85000],
     [2,"Asim", "PHP Developer", 25000],
     [3,"Sami", "PHP Developer", 150000],
     [4,"Sumaya", "School Teacher", 25000],
   ];
   echo "<pre>";
-    print_r($employee);
+    print_r($employees);
   echo "</pre>";
-  echo "<table>";
   echo "
+  <table>
     <tr>
       <td>S No</td>
       <td>Name</td>
@@ -55,18 +55,77 @@
       <td>Salary</td>
     </tr>
   ";
-  for($i = 0; $i < sizeof($employee); $i++ ){
+  for($i = 0; $i < sizeof($employees); $i++ ){
     echo "<tr>";
-    for($ii = 0; $ii < sizeof($employee[$i]); $ii++ ){
+    for($ii = 0; $ii < sizeof($employees[$i]); $ii++ ){
       echo "<td>"; 
-      echo $employee[$i][$ii];     
+      echo $employees[$i][$ii];     
       echo "</td>";      
-
     }  
     echo "</tr>";
   }
   echo "</table>";
 
+  echo "<h2>4. Multidimensional Array Foreach </h2>";
+  
+  echo "
+  <table>
+  <tr>
+    <td>S No</td>
+    <td>Name</td>
+    <td>Appointment</td>
+    <td>Salary</td>
+  </tr>
+";
+  foreach($employees as $employee){
+    echo "<tr>";
+    foreach($employee as $field){
+      echo "<td>$field</td>"; 
+    }
+    echo "</tr>";
+  }
+  echo "</table>";
+
+  echo "<h2>5. Multidimensional Assosiative Array </h2>";
+  $students = [
+    "Ahsan" => [
+      "physics" => 85,
+      "maths" => 40,
+      "chemistry" => 70,
+    ],
+    "Sami" => [
+      "physics" => 85,
+      "maths" => 90,
+      "chemistry" => 92,
+    ],
+    "Qasim" => [
+      "physics" => 30,
+      "maths" => 20,
+      "chemistry" => 40,
+    ],
+  ];
+  echo "<pre>";
+    print_r($students);
+  echo "</pre>";
+
+  echo "
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Physics</th>
+      <th>Maths</th>
+      <th>Chemistry</th>
+    </tr>
+  ";
+  foreach($students as $name => $student){
+    echo "<tr>";
+      echo "<th>$name</th>"; 
+      foreach($student as $field){
+      echo "<td>$field</td>"; 
+    }
+    echo "</tr>";
+  }
+  echo "</table>";
 
 
 

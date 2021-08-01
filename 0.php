@@ -8,6 +8,8 @@
     <li><a href="2.php">Conditional Statement</a> </li>
     <li><a href="3.php">Loops & goto Statement</a> </li>
     <li><a href="4.php">Functions</a> </li>
+    <li><a href="5.php">Array & Foreach</a> </li>
+    <li><a href="6.php">List & Foreach</a> </li>
   </ol>
   </h3>
   ';
