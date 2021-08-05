@@ -1,0 +1,16 @@
+Google Cloud > Console > API & Services > OAuth Consent Screen
+1. Provide App Name
+2. Personnel Email Address
+3. Profession Email Addres
+
+> Scopes (Save.....)
+
+> Credentials > Create Creadentials > Web App > Create OAuth Client ID
+Name 				: WebApplication Name
+Authorized JavaScript Origins 	: http://localhost:9090
+Authorized redired URIs		: http://localhost:9090/login
+
+Create
+
+Download
+{"web":{"client_id":"94744932737-i79r0vthi9r528lsnm5vif4l37rv34k6.apps.googleusercontent.com","project_id":"boxwood-faculty-253314","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"7iQtC43SEXedpr7lJfb1MU3Z","redirect_uris":["http://localhost:9090/login"],"javascript_origins":["http://localhost:9090"]}}
