@@ -1,0 +1,30 @@
+<h2>String Functions in MySQL</h2>
+<ol>
+  <li>UPPER()</li>
+  <li>LOWER</li>
+  <li>LENGTH</li>
+  <li>CHAR_LENGTH</li>
+  <li>CONCAT</li>
+  <li>LTRIM</li>
+  <li>RTRIM</li>
+  <li>TRIM</li>
+  <li>POSITION</li>
+  <li>LOCATE</li>
+  <li>INSTR</li>
+  <li>SUBSTRING / SUBSTR</li>
+  <li>MID</li>
+  <li>SUBSTRING_INDEX</li>
+  <li>LEFT</li>
+  <li>RIGHT</li>
+  <li>LPAD</li>
+  <li>RPAD</li>
+  <li>SPACE</li>
+  <li>REVERSE</li>
+  <li>REPEAT</li>
+  <li>REPLACE</li>
+  <li>STRCMP</li>
+  <li>FIELD</li>
+  <li>FIND_IN_SET</li>
+  <li>FORMAT</li>
+  <li>HEX</li>
+</ol>

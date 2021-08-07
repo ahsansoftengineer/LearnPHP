@@ -1,6 +1,4 @@
-<?php
-  echo "<h1>URLs</h1>";
-  echo '
+<h1>URLs</h1>
   <h3>
   <ol>
     <li><a href="http://localhost/a/0.php">Home</a> </li>
@@ -19,5 +17,3 @@
     
   </ol>
   </h3>
-  ';
-?>
