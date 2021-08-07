@@ -12,5 +12,3 @@
   $result = mysqli_query($conn, $sql) or die("Student Update Query Failed");
   mysqli_close($conn);
   header("Location:index.php");
-
-?>
