@@ -1,7 +1,7 @@
 <h1>URLs</h1>
-  <h3>
+<h3>
   <ol>
-    <li><a href="http://localhost/a/0.php">Home</a> </li>
+    <li><a href="https://localhost/a/home.php">Main Home</a> </li>
     <li><a href="1.php">Data Types</a> </li>
     <li><a href="2.php">Conditional Statement</a> </li>
     <li><a href="3.php">Loops & goto Statement</a> </li>
@@ -14,6 +14,5 @@
     <li><a href="10.php">SESSION</a></li>
     <li><a href="11.php">File Upload</a></li>
     <li><a href="0.php">die() / exit("Message")</a></li>
-    
   </ol>
-  </h3>
+</h3>
