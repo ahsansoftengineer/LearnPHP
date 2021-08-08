@@ -1,4 +1,8 @@
 <?php
   // To Redirect User to Another Page
-  header("Location : https://localhost/a/phpmysql/crud/index.php");
+  header("Location:index.php");
+  $fname = mysqli_real_escape_string($conn, $_POST['fname']);
+  $password = mysqli_real_escape_string($conn, md5($_POST['password']));
+
+
 ?>
