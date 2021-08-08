@@ -1,5 +1,8 @@
 <?php
   include "header.php";
+  if(!$_SESSION['user_role'] == 1){
+    header("Location: {$hostname}admin/post.php");
+  }
   include "config.php";
   $pageNo = 1;
   if(isset($_GET['page'])){

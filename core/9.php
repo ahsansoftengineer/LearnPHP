@@ -14,6 +14,9 @@ function mainHeading($Heading){
   setcookie('user', 'Yahoo Baba', time() + (86400 * 30), "/" );
   setcookie('admin', 'Yahoo Baba Admin', time() + (86400 * 30), "/" );
   setcookie('cookieToDelete', 'Delete This Cookie by removing time', time() + (86400 * 30), "/" );
+  setcookie('user', 'Yahoo Baba', time() - (86400 * 30), "/" );
+  setcookie('admin', 'Yahoo Baba Admin', time() - (86400 * 30), "/" );
+  setcookie('cookieToDelete', 'Delete This Cookie by removing time', time() - (86400 * 30), "/" );
   
 
 ?>

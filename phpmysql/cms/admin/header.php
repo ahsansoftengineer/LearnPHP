@@ -1,3 +1,11 @@
+<?php
+  // Incase if User is not Logged in then Redirect User to Login Page
+  include 'config.php';
+  session_start();
+  if(!isset($_SESSION['username'])){
+    header("Location: {$hostname}admin/");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +36,10 @@
         </div>
         <!-- /LOGO -->
         <!-- LOGO-Out -->
-        <div class="col-md-offset-9  col-md-1">
-          <a href="logout.php" class="admin-logout">logout</a>
+        <div class="col-md-offset-7  col-md-3 p-0 m-0" style="text-align: right;">
+          <h5 class="p-0 m-0" style="color: white; margin:0px !important">Hello <?php echo $_SESSION['first_name'] ?></h5>
+          <a href="logout.php" class="admin-logout p-0" 
+          style="margin:0px !important; font-size:medium">logout</a>
         </div>
         <!-- /LOGO-Out -->
       </div>
@@ -45,12 +55,18 @@
             <li>
               <a href="post.php">Post</a>
             </li>
+            <?php 
+              if ($_SESSION["user_role"] == 1) {
+                  ?>
             <li>
               <a href="category.php">Category</a>
             </li>
             <li>
               <a href="users.php">Users</a>
             </li>
+            <?php
+              }
+            ?>
           </ul>
         </div>
       </div>
