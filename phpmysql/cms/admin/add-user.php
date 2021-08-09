@@ -20,9 +20,7 @@
           echo $sql1;
         }
     }
-
   }
-
 ?>
 <div id="admin-content">
   <div class="container">

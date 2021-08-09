@@ -1,4 +1,13 @@
-<?php include "header.php"; ?>
+<?php 
+  include "header.php"; 
+  include "config.php";
+  $pageNo = 1;
+  if(isset($_GET['page'])){
+    $pageNo = $_GET['page'];
+  }
+  $pageSize = 3;
+  $offset = ($pageNo - 1) * $pageSize;
+?>
 <div id="admin-content">
   <div class="container">
     <div class="row">
@@ -20,84 +29,66 @@
             <th>Delete</th>
           </thead>
           <tbody>
+          <?php
+            $sql = "SELECT p.post_id, p.title, c.category_name, p.post_date, u.first_name 
+            FROM post AS p 
+            LEFT JOIN category AS c ON p.category = c.category_id 
+            LEFT JOIN user AS u ON p.author = u.user_id ";
+            if($_SESSION["user_role"] == "0"){
+              $sql .= " WHERE u.user_id = ".$_SESSION["user_id"];
+            }
+            $sql .= " ORDER BY post_id DESC LIMIT {$offset}, {$pageSize};";
+
+            $result = mysqli_query($conn, $sql) or die("User Query Failed");
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
-              <td class='id'>1</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
+              <td class='id'><?php echo $row['post_id'] ?></td>
+              <td><?php echo $row['title'] ?></td>
+              <td><?php echo $row['category_name'] ?></td>
+              <td><?php echo $row['post_date'] ?></td>
+              <td><?php echo $row['first_name'] ?></td>
+              <td class='edit'>
+                <a href="update-post.php?id=<?php echo $row['post_id'] ?>">
+                  <i class='fa fa-edit'></i>
+                </a>
+              </td>
+              <td class='delete'>
+                <a href="delete-post.php?id=<?php echo $row['post_id'] ?>">
+                  <i class='fa fa-trash-o'></i>
+                </a>
+              </td>
             </tr>
-            <tr>
-              <td class='id'>2</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>3</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>4</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>5</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>6</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>7</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>8</td>
-              <td>Lorem ipsum dolor sit amet</td>
-              <td>Html</td>
-              <td>01 Nov, 2019</td>
-              <td>Admin</td>
-              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
+            <?php 
+              }
+            }?>
           </tbody>
         </table>
+        <?php 
+            $sql1 = "SELECT COUNT(post_id) AS totalRows 
+            FROM post
+            LEFT JOIN user ON author = user_id";
+            if($_SESSION["user_role"] == "0"){
+              $sql1 .= " WHERE user_id = ".$_SESSION["user_id"];
+            }
+            $result1 = mysqli_query($conn, $sql1) or die("User Query Failed");
+            $rows = mysqli_fetch_array($result1)[0];
+            $pages = ceil($rows / $pageSize);
+        ?>
         <ul class='pagination admin-pagination'>
-          <li class="active"><a>1</a></li>
-          <li><a>2</a></li>
-          <li><a>3</a></li>
+        <?php if ($pageNo > 1) { ?>
+          <li><a href="post.php?page=<?php echo($pageNo - 1) ?>">Prev</a></li>
+          <?php }
+            for ($page = 1; $page <= $pages; $page++) { ?>
+            <li class="<?php echo $page == $pageNo ? 'active' : '' ?>">
+              <a href="post.php?page=<?php echo $page ?>">
+                <?php echo $page ?>
+              </a>
+            </li>
+          <?php } 
+          if ($pageNo < $pages) { ?>
+              <li><a href="post.php?page=<?php echo($pageNo + 1) ?>">Next</a></li>
+          <?php } ?>
         </ul>
       </div>
     </div>
