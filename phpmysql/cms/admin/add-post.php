@@ -7,7 +7,7 @@
       </div>
       <div class="col-md-offset-3 col-md-6">
         <!-- Form -->
-        <form action="save-post.php" method="POST" enctype="multipart/form-data">
+        <form action="add-post-save.php" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" class="form-control" autocomplete="off" required>

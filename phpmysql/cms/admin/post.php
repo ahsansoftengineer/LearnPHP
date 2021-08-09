@@ -30,8 +30,8 @@
           </thead>
           <tbody>
           <?php
-            $sql = "SELECT p.post_id, p.title, c.category_name, p.post_date, u.first_name 
-            FROM post AS p 
+            $sql = "SELECT p.post_id, p.title, p.post_date, p.category, c.category_name, 
+            u.first_name FROM post AS p 
             LEFT JOIN category AS c ON p.category = c.category_id 
             LEFT JOIN user AS u ON p.author = u.user_id ";
             if($_SESSION["user_role"] == "0"){
@@ -54,7 +54,7 @@
                 </a>
               </td>
               <td class='delete'>
-                <a href="delete-post.php?id=<?php echo $row['post_id'] ?>">
+                <a href="delete-post.php?post_id=<?php echo $row['post_id'] ?>&category_id=<?php echo $row['category'] ?>">
                   <i class='fa fa-trash-o'></i>
                 </a>
               </td>
