@@ -1,7 +1,15 @@
-<?php include "header.php"; 
+<?php 
+  include "header.php"; 
+  include "config.php";
   if(!$_SESSION['user_role'] == 1){
     header("Location: {$hostname}admin/post.php");
   }
+  include "config.php";
+  $pageNo = 1;
+  if(isset($_GET['page'])){
+    $pageNo = $_GET['page'];
+  }
+$offset = ($pageNo - 1) * $pageSize;
 ?>
 <div id="admin-content">
   <div class="container">
@@ -22,54 +30,52 @@
             <th>Delete</th>
           </thead>
           <tbody>
+          <?php
+            $sql = "SELECT * FROM category 
+              ORDER BY category_id 
+              DESC LIMIT {$offset}, {$pageSize};";
+            $result = mysqli_query($conn, $sql) or die("Query Failed : Category GET");
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
-              <td class='id'>1</td>
-              <td>Html</td>
-              <td>5</td>
-              <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
+              <td class='id'><?php echo $row['category_id'] ?></td>
+              <td><?php echo $row['category_name'] ?></td>
+              <td><?php echo $row['post'] ?></td>
+              <td class='edit'>
+                <a href='update-category.php?id=<?php echo $row['category_id'] ?>'>
+                  <i class='fa fa-edit'></i>
+                </a>
+              </td>
+              <td class='delete'>
+                <a href='delete-category.php?id=<?php echo $row['category_id'] ?>'>
+                  <i class='fa fa-trash-o'></i>
+                </a>
+              </td>
             </tr>
-            <tr>
-              <td class='id'>2</td>
-              <td>Css</td>
-              <td>15</td>
-              <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>3</td>
-              <td>Java</td>
-              <td>8</td>
-              <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>4</td>
-              <td>Php</td>
-              <td>11</td>
-              <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>5</td>
-              <td>Python</td>
-              <td>13</td>
-              <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
-            <tr>
-              <td class='id'>6</td>
-              <td>Scss</td>
-              <td>3</td>
-              <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-              <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-            </tr>
+            <?php }}?>
           </tbody>
         </table>
+        <?php 
+            $sql1 = "SELECT COUNT(category_id) AS totalRows 
+            FROM category ";
+            $result1 = mysqli_query($conn, $sql1) or die("User Query Failed");
+            $rows = mysqli_fetch_array($result1)[0];
+            $pages = ceil($rows / $pageSize);
+        ?>
         <ul class='pagination admin-pagination'>
-          <li class="active"><a>1</a></li>
-          <li><a>2</a></li>
-          <li><a>3</a></li>
+        <?php if ($pageNo > 1) { ?>
+          <li><a href="category.php?page=<?php echo($pageNo - 1) ?>">Prev</a></li>
+          <?php }
+            for ($page = 1; $page <= $pages; $page++) { ?>
+            <li class="<?php echo $page == $pageNo ? 'active' : '' ?>">
+              <a href="category.php?page=<?php echo $page ?>">
+                <?php echo $page ?>
+              </a>
+            </li>
+          <?php } 
+          if ($pageNo < $pages) { ?>
+              <li><a href="category.php?page=<?php echo($pageNo + 1) ?>">Next</a></li>
+          <?php } ?>
         </ul>
       </div>
     </div>

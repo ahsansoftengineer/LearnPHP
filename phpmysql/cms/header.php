@@ -37,10 +37,32 @@
       <div class="row">
         <div class="col-md-12">
           <ul class='menu'>
-            <li><a href='category.php'>Business</a></li>
-            <li><a href='category.php'>Entertainment</a></li>
-            <li><a href='category.php'>Sports</a></li>
-            <li><a href='category.php'>Politics</a></li>
+          <li>
+            <a class="<?php echo isset($_GET['category_id']) ? '' : 'active'?>" href="index.php">
+              HOME
+            </a>
+          </li>
+            <?php 
+              include "config.php";
+              if (isset($_GET['category_id'])) {
+                  $category_id = $_GET['category_id'];
+              }
+                $sql = "SELECT * from category WHERE post > 0";
+                $result = mysqli_query($conn, $sql) or die("Query Failed. : Category Get Header");
+                if (mysqli_num_rows($result) > 0) {
+                  while ($row = mysqli_fetch_assoc($result)) {?>
+               ?>
+               <li>
+                  <a class="<?php echo $category_id == $row['category_id'] ? 'active' : ''?>" href="category.php?category_id=<?php echo $row['category_id'] ?>">
+                    <?php echo $row['category_name'] ?>
+                  </a>
+                </li>
+              <?php
+                }
+              } else {
+                echo "<li><a href='category.php'>No Category Found</a></li>";
+              }
+            ?>
           </ul>
         </div>
       </div>

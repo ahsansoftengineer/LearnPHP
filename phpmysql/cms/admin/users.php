@@ -8,7 +8,6 @@
   if(isset($_GET['page'])){
     $pageNo = $_GET['page'];
   }
-  $pageSize = 5;
   $offset = ($pageNo - 1) * $pageSize;
 ?>
 <div id="admin-content">

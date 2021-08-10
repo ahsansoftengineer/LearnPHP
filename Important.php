@@ -3,7 +3,7 @@
   header("Location:index.php");
   $fname = mysqli_real_escape_string($conn, $_POST['fname']);
   $password = mysqli_real_escape_string($conn, md5($_POST['password']));
-  // To Prevent from Directory Searcher add index.php file within that folder
+  // To Prevent from Directory Searcher add index.php file within that folder or use htaccess Method
   // Saving File within Directory
   move_uploaded_file($file_tmp_name, "upload/".$file_name);
   // Delete File from Directory
