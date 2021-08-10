@@ -78,7 +78,7 @@
           <?php }
             for ($page = 1; $page <= $pages; $page++) { ?>
             <li class="<?php echo $page == $pageNo ? 'active' : '' ?>">
-              <a href="category.php?category_id=<?php echo($category_id) ?>&page=<?php echo($pageNo) ?>">
+              <a href="category.php?category_id=<?php echo($category_id) ?>&page=<?php echo($page) ?>">
                 <?php echo $page ?>
               </a>
             </li>
