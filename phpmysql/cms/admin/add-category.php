@@ -1,24 +1,15 @@
-<?php include "header.php"; 
-if(isset($_POST['save'])){
+<?php 
+  include "header.php"; 
   include "config.php";
-  echo $categoryName = mysqli_real_escape_string($conn, $_POST['cat']);
-
-  $sql = "SELECT username FROM user WHERE username = '{$user}'";
-  $result = mysqli_query($conn, $sql) or die("Query Failed.");
-  if(mysqli_num_rows($result) > 0){
-    echo "User Name Already Exsists.";
-  } else {
-    $sql1 = "INSERT INTO user (first_name, last_name, username, password, role)
-      VALUES ('{$fname}', '{$lname}', '{$user}', '{$password}', '{$role}')";
-      if(mysqli_query($conn, $sql1)){
-        header("Location: {$hostname}admin/users.php");
+  if (isset($_POST['save'])) {
+      $category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
+      $sql = "INSERT INTO category (category_name) VALUES ('{$category_name}')";
+      if (mysqli_query($conn, $sql)) {
+          header("Location: {$hostname}admin/category.php");
       } else {
-        echo $sql1;
+          echo $sql;
       }
   }
-
-}
-
 ?>
 <div id="admin-content">
   <div class="container">
@@ -28,10 +19,10 @@ if(isset($_POST['save'])){
       </div>
       <div class="col-md-offset-3 col-md-6">
         <!-- Form Start -->
-        <form action="" method="POST" autocomplete="off">
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
           <div class="form-group">
             <label>Category Name</label>
-            <input type="text" name="cat" class="form-control" required>
+            <input type="text" name="category_name" class="form-control" required>
           </div>
           <input type="submit" name="save" class="btn btn-primary" value="Save" required />
         </form>

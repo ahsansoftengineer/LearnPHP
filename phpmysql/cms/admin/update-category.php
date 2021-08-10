@@ -1,17 +1,17 @@
-<?php include "header.php";
+<?php 
+  include "header.php";
   include "config.php";
-  if(isset($_POST['submit'])){
-    echo $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
-    echo $category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
-    echo $post = mysqli_real_escape_string($conn, $_POST['post']);
-    $sql1 = "UPDATE category SET 
-      category_name = '{$category_name}', 
-      post = '{$post}'";
-      if(mysqli_query($conn, $sql1)){
+
+  if(isset($_POST['save'])){
+    $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
+    $category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
+    $sql1 = "UPDATE category SET category_name = '{$category_name}' 
+      WHERE category_id = {$category_id}";
+    if(mysqli_query($conn, $sql1)){
         header("Location: {$hostname}admin/category.php");
-      } else {
+    } else {
         echo $sql1;
-      }
+    }
   }
 ?>
 <div id="admin-content">
@@ -21,7 +21,6 @@
         <h1 class="adin-heading"> Update Category</h1>
       </div>
       <div class="col-md-offset-3 col-md-6">
-
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
         <?php
             $id = 0;
@@ -44,14 +43,14 @@
           </div>
           <div class="form-group">
             <label>No of Post</label>
-            <input type="text" disabled name="post" class="form-control" 
+            <input type="text" disabled class="form-control" 
             value="<?php echo $row['post'] ?>" >
           </div>
           <?php
               }
             }
           ?>
-          <input type="submit" name="sumbit" class="btn btn-primary" value="Update" required />
+          <input type="submit" name="save" class="btn btn-primary" value="Update" required />
         </form>
       </div>
     </div>
