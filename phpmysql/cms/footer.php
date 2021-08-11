@@ -8,5 +8,9 @@
   </div>
 </div>
 </body>
-
+<script>
+    var title = document.getElementsByClassName('page-heading')[0].innerHTML;
+    console.log(title);
+    document.getElementsByTagName('title')[0].innerHTML = title;
+    </script>
 </html>
