@@ -38,7 +38,9 @@
         <div class="col-md-12">
           <ul class='menu'>
           <li>
-            <a class="<?php echo isset($_GET['category_id']) | isset($_GET['author']) ? '' : 'active'?>" href="index.php">
+            <a class="
+            <?php echo isset($_GET['category_id']) | isset($_GET['author']) |
+             isset($_GET['search'])  ? '' : 'active'?>" href="index.php">
               HOME
             </a>
           </li>

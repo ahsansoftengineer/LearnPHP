@@ -92,7 +92,8 @@
               <li><a href="category.php?category_id=<?php echo($category_id) ?>&page=<?php echo($pageNo + 1) ?>">Next</a></li>
           <?php } ?>
         </ul>
-        </div><!-- /post-container -->
+        </div>
+        <!-- /post-container -->
       </div>
       <?php include 'sidebar.php'; ?>
     </div>

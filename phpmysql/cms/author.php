@@ -1,13 +1,14 @@
-<?php include 'header.php';
-$pageNo = 1;
-$author = 1;
-if (isset($_GET['page'])) {
-  $pageNo = $_GET['page'];
-}
-if (isset($_GET['author'])) {
-  $author = $_GET['author'];
-}
-$offset = ($pageNo - 1) * $pageSize;
+<?php 
+  include 'header.php';
+  $pageNo = 1;
+  $author = 1;
+  if (isset($_GET['page'])) {
+    $pageNo = $_GET['page'];
+  }
+  if (isset($_GET['author'])) {
+    $author = $_GET['author'];
+  }
+  $offset = ($pageNo - 1) * $pageSize;
 ?>
 <div id="main-content">
   <div class="container">
