@@ -15,18 +15,23 @@
       <div class="col-md-8">
         <!-- post-container -->
         <div class="post-container">
-          <h2 class="page-heading">Category Name</h2>
-          <?php
-           
+        <?php
+           $sql = "SELECT category_name FROM category WHERE category_id = {$category_id}";
+           $result = mysqli_query($conn, $sql) or die("Category Failed: GET");
+           if (mysqli_num_rows($result) > 0) {
+               while ($row = mysqli_fetch_assoc($result)) {
+                 echo "<h2 class='page-heading'>{$row['category_name']}</h2>";
+               }
+           }
             $sql = "SELECT p.post_id, p.title, p.post_date, p.category, p.description, 
-            p.post_img, c.category_name, u.first_name 
+            p.author, p.post_img, c.category_name, u.first_name 
             FROM post AS p 
             LEFT JOIN category AS c ON p.category = c.category_id 
             LEFT JOIN user AS u ON p.author = u.user_id 
             WHERE c.category_id = {$category_id}
             ORDER BY post_id DESC LIMIT {$offset}, {$pageSize};";
 
-            $result = mysqli_query($conn, $sql) or die("User Query Failed");
+            $result = mysqli_query($conn, $sql) or die("Get Failed: POST");
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) { ?>
           <div class="post-content">
@@ -43,11 +48,11 @@
                   <div class="post-information">
                     <span>
                       <i class="fa fa-tags" aria-hidden="true"></i>
-                      <a href='category.php'><?php echo $row['category_name'] ?></a>
+                      <a href='category.php?category_id=<?php echo $row['category']?>'><?php echo $row['category_name'] ?></a>
                     </span>
                     <span>
                       <i class="fa fa-user" aria-hidden="true"></i>
-                      <a href='author.php'><?php echo $row['first_name'] ?></a>
+                      <a href='author.php?author=<?php echo $row['author']?>'><?php echo $row['first_name'] ?></a>
                     </span>
                     <span>
                       <i class="fa fa-calendar" aria-hidden="true"></i>
