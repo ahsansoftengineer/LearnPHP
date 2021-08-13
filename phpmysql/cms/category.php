@@ -29,6 +29,7 @@
             LEFT JOIN category AS c ON p.category = c.category_id 
             LEFT JOIN user AS u ON p.author = u.user_id 
             WHERE c.category_id = {$category_id}
+            -- GROUP BY c.category_id
             ORDER BY post_id DESC LIMIT {$offset}, {$pageSize};";
 
             $result = mysqli_query($conn, $sql) or die("Get Failed: POST");

@@ -30,17 +30,21 @@ $offset = ($pageNo - 1) * $pageSize;
             <th>Delete</th>
           </thead>
           <tbody>
-          <?php
-            $sql = "SELECT * FROM category 
-              ORDER BY category_id 
-              DESC LIMIT {$offset}, {$pageSize};";
+          <?php 
+            $sql = "SELECT c.category_id, c.category_name, COUNT(p.post_id) AS posts 
+            FROM category AS c
+            LEFT OUTER JOIN post AS p
+            ON c.category_id = p.category
+            GROUP BY c.category_id
+            ORDER BY category_id
+            DESC LIMIT {$offset}, {$pageSize};";
             $result = mysqli_query($conn, $sql) or die("Query Failed : Category GET");
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
-              <td class='id'><?php echo $row['category_id'] ?></td>
+              <td class='id'><?php echo $offset+=1 ?></td>
               <td><?php echo $row['category_name'] ?></td>
-              <td><?php echo $row['post'] ?></td>
+              <td><?php echo $row['posts'] ?></td>
               <td class='edit'>
                 <a href='update-category.php?id=<?php echo $row['category_id'] ?>'>
                   <i class='fa fa-edit'></i>

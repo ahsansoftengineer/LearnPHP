@@ -93,7 +93,8 @@
                ?>
                <li>
                   <a class="<?php echo $category_id == $row['category_id'] ? 'active' : ''?>" href="category.php?category_id=<?php echo $row['category_id'] ?>">
-                    <?php echo $row['category_name'] ?> <sup>(<?php echo $row['posts'] ?>)</sup>
+                    <?php echo $row['category_name'] ?>
+                    <sup>(<?php echo $row['posts'] ?>)</sup>
                   </a>
                 </li>
               <?php

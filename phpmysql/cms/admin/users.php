@@ -36,7 +36,7 @@
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_assoc($result)) { ?>
                 <tr>
-                  <td class='id'><?php echo $row['user_id'] ?> </td>
+                  <td class='id'><?php echo $offset+=1 ?> </td>
                   <td><?php echo $row['first_name'] . ' ' . $row['last_name'] ?></td>
                   <td><?php echo $row['username'] ?></td>
                   <td><?php echo $row['role'] == 1 ? 'Admin' : 'Normal' ?></td>

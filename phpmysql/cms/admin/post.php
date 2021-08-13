@@ -42,7 +42,7 @@
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
-              <td class='id'><?php echo $row['post_id'] ?></td>
+              <td class='id'><?php echo $offset+=1 ?></td>
               <td><?php echo $row['title'] ?></td>
               <td><?php echo $row['category_name'] ?></td>
               <td><?php echo $row['post_date'] ?></td>
