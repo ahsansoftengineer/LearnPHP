@@ -28,6 +28,7 @@ h2.page-heading{
   border-bottom: 2px solid #333;
 }
 
+
 /* ===================== */
 
 /* ===================== */
@@ -71,6 +72,10 @@ img.logo{
 #admin-menubar .admin-menu li{
     display: inline-block;
     margin: 0 5px 0 0;
+}
+#admin-menubar .admin-menu li a.active{
+  background:#1e90ff !important;
+  color:white !important;
 }
 #admin-menubar .admin-menu li a{
     color: #1E90FF;
